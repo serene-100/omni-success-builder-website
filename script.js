@@ -1,7 +1,7 @@
 const navToggle = document.querySelector(".nav-toggle");
 const navLinks = document.querySelector("#navLinks");
 const year = document.querySelector("#year");
-const whatsappNumber = "60000000000";
+const whatsappNumber = "60164260066";
 
 if (year) {
   year.textContent = new Date().getFullYear();
@@ -23,7 +23,13 @@ if (navToggle && navLinks) {
 
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   anchor.addEventListener("click", (event) => {
-    const target = document.querySelector(anchor.getAttribute("href"));
+    const href = anchor.getAttribute("href");
+
+    if (href === "#" || href.length < 2) {
+      return;
+    }
+
+    const target = document.querySelector(href);
 
     if (!target) {
       return;
@@ -37,3 +43,16 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 document.querySelectorAll("#whatsappFloat, #whatsappInline").forEach((link) => {
   link.href = `https://wa.me/${whatsappNumber}`;
 });
+
+// Hero slideshow: automatic fade transition every 5 seconds
+const heroSlides = document.querySelectorAll(".hero-slide");
+
+if (heroSlides.length > 1) {
+  let activeSlide = 0;
+
+  setInterval(() => {
+    heroSlides[activeSlide].classList.remove("is-active");
+    activeSlide = (activeSlide + 1) % heroSlides.length;
+    heroSlides[activeSlide].classList.add("is-active");
+  }, 5000);
+}
